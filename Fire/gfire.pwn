@@ -23,20 +23,20 @@
 
 #define GFire_BurnOthers								
 #define GFire_CanBurnPlayers              1
-#define GFire_BURNING_RADIUS 			1.2     	
+#define GFire_BURNING_RADIUS 				1.2     	
 #define GFire_ONFOOT_RADIUS				1.5			
 #define GFire_PISSING_DISTANCE			2.0			
-#define GFire_CAR_RADIUS				7.0			
+#define GFire_CAR_RADIUS					7.0			
 #define GFire_Z_DIFFERENCE				2.5			
-#define FIRE_UPDATE_TIMER_DELAY     	500     			
-#define EXTINGUISH_TIME_VEHICLE			2					
-#define EXTINGUISH_TIME_ONFOOT			4					
-#define EXTINGUISH_TIME_PEEING			10			
-#define EXTINGUISH_TIME_PLAYER			2			
+#define FIRE_UPDATE_TIMER_DELAY     		500     			
+#define EXTINGUISH_TIME_VEHICLE				2					
+#define EXTINGUISH_TIME_ONFOOT				4					
+#define EXTINGUISH_TIME_PEEING				10			
+#define EXTINGUISH_TIME_PLAYER				2			
 #define GFire_FIRE_OBJECT_SLOT			9
 
-#define GFIRE_TYPE_NORMAL				1
-#define GFIRE_TYPE_LARGER				2
+#define GFIRE_TYPE_NORMAL					1
+#define GFIRE_TYPE_LARGER					2
 
 #if !defined SPECIAL_ACTION_PISSING
 	#define SPECIAL_ACTION_PISSING	(68)
@@ -210,9 +210,9 @@ public DestroyFire(id)
 {
  	DestroyDynamicObject(GFire_Data[id][GFire_id]);
 	GFire_Data[id][GFire_Exists] = 0;
-	GFire_Data[id][GFire_pos][0] = 555550.0;
-	GFire_Data[id][GFire_pos][1] = 555550.0;
-	GFire_Data[id][GFire_pos][2] = 555550.0;
+	GFire_Data[id][GFire_pos][0] = 0.0;
+	GFire_Data[id][GFire_pos][1] = 0.0;
+	GFire_Data[id][GFire_pos][2] = 0.0;
 	RemoveSmokeFromFire(id);
 	return 1;
 }
