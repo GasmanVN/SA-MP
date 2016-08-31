@@ -198,7 +198,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	}
 	if(newkeys & KEY_FIRE)
 	{
-		if(IsPlayerPouredOutPetrol(playerid)  == 1 && JerryCan_Data[playerid][jcObjectJerryCanCreated] == 0)
+		if(IsPlayerPetrolPouredOut(playerid)  == 1 && JerryCan_Data[playerid][jcObjectJerryCanCreated] == 0)
 		{
 			TogglePlayerHoldJerryCan(playerid, false);
 			TogglePlayerPouredOutPetrol(playerid, false);
@@ -262,10 +262,10 @@ public OnPlayerShootDynamicObject(playerid, weaponid, objectid, Float:x, Float:y
 }
 public OnPlayerHoldingKey(playerid,key)
 {
-	if(IsPlayerHoldJerryCan(playerid) == 1 && key == 128 && JerryCan_Data[playerid][jcFuelValue]> 0
+	if(IsPlayerHoldingJerryCan(playerid) == 1 && key == 128 && JerryCan_Data[playerid][jcFuelValue]> 0
 		&&JerryCan_Data[playerid][jcObjectFuelUsed] < MAX_JERRYCAN_FUELOBJECT-2 &&JerryCan_Data[playerid][jcObjectJerryCanCreated] == 0)
 	{
-		if(IsPlayerPouredOutPetrol(playerid)  == 0)
+		if(IsPlayerPetrolPouredOut(playerid)  == 0)
 		{
 			PlayerTextDrawShow(playerid, JerryCanText[playerid][0]);
 		}
@@ -293,7 +293,7 @@ public OnPlayerHoldingKey(playerid,key)
 }
 public OnPlayerStopHoldingKey(playerid,key)
 {
-	if(IsPlayerPouredOutPetrol(playerid) == 1 && key == 128)
+	if(IsPlayerPetrolPouredOut(playerid) == 1 && key == 128)
 	{
 		TogglePlayerPouredOutPetrol(playerid, false);
 		PlayerTextDrawHide(playerid, JerryCanText[playerid][0]);
@@ -341,7 +341,7 @@ public OnPlayerUpdate(playerid)//Wiki
  
 stock OnPlayerChangeWeapon(playerid, oldweapon, newweapon)
 {
-	if(newweapon == 0 && IsPlayerHoldJerryCan(playerid) == 1)
+	if(newweapon == 0 && IsPlayerHoldingJerryCan(playerid) == 1)
 	{
 		new string[128];
 		format(string, sizeof(string), "%d", JerryCan_Data[playerid][jcFuelValue]);
@@ -350,7 +350,7 @@ stock OnPlayerChangeWeapon(playerid, oldweapon, newweapon)
 		PlayerTextDrawShow(playerid, JerryCanText[playerid][1]);
 		TogglePlayerHoldJerryCan(playerid, true);
 	}
-	else if(oldweapon == 0 && IsPlayerHoldJerryCan(playerid) == 1)
+	else if(oldweapon == 0 && IsPlayerHoldingJerryCan(playerid) == 1)
 	{
 		PlayerTextDrawHide(playerid, JerryCanText[playerid][0]);
 		PlayerTextDrawHide(playerid, JerryCanText[playerid][1]);
@@ -526,7 +526,7 @@ TogglePlayerHoldJerryCan(playerid, bool:toggle)
 	}
 	return 1;
 }
-IsPlayerHoldJerryCan(playerid)
+IsPlayerHoldingJerryCan(playerid)
 {
 	return GetPVarInt(playerid, "G_UseJerryCan");
 }
@@ -546,7 +546,7 @@ TogglePlayerPouredOutPetrol(playerid, bool:toggle)
 	}
 	return 1;
 }
-IsPlayerPouredOutPetrol(playerid)
+IsPlayerPetrolPouredOut(playerid)
 {
 	return GetPVarInt(playerid, "G_PouredOutPetrol");
 }
@@ -555,7 +555,7 @@ SetPlayerJerryCanFuel(playerid, value)
 	JerryCan_Data[playerid][jcFuelValue] = value;
 	if(JerryCan_Data[playerid][jcFuelValue] > MAX_JERRYCAN_FUELOBJECT)
 		JerryCan_Data[playerid][jcFuelValue] = MAX_JERRYCAN_FUELOBJECT-1;
-	if(IsPlayerHoldJerryCan(playerid) == 1)
+	if(IsPlayerHoldingJerryCan(playerid) == 1)
 	{
 		new string[128];
 		format(string, sizeof(string), "%d", JerryCan_Data[playerid][jcFuelValue]);
@@ -571,7 +571,7 @@ stock GivePlayerJerryCanFuel(playerid, value)// stock because now unused
 	JerryCan_Data[playerid][jcFuelValue] += value;
 	if(JerryCan_Data[playerid][jcFuelValue] > MAX_JERRYCAN_FUELOBJECT)
 		JerryCan_Data[playerid][jcFuelValue] = MAX_JERRYCAN_FUELOBJECT-1;
-	if(IsPlayerHoldJerryCan(playerid) == 1)
+	if(IsPlayerHoldingJerryCan(playerid) == 1)
 	{
 		new string[128];
 		format(string, sizeof(string), "%d", JerryCan_Data[playerid][jcFuelValue]);
